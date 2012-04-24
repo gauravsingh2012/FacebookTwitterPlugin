@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/tweeteclipse/!svn/ver/40/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl
+END
+TwitterFileWriter.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svnroot/tweeteclipse/!svn/ver/53/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl/TwitterFileWriter.java
+END
+TwitterOperationsHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svnroot/tweeteclipse/!svn/ver/38/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl/TwitterOperationsHandler.java
+END
+TwitterLoginHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svnroot/tweeteclipse/!svn/ver/38/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl/TwitterLoginHandler.java
+END
+TwitterAccountManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svnroot/tweeteclipse/!svn/ver/36/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl/TwitterAccountManager.java
+END
+RefreshTwitterViewAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svnroot/tweeteclipse/!svn/ver/38/edu.scoe.wss.web/src/edu/scoe/wss/web/internal/twitter/impl/RefreshTwitterViewAction.java
+END

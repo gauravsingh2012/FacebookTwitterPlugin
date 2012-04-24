@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/tweeteclipse/!svn/ver/29/edu.scoe.wss.web
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/tweeteclipse/!svn/ver/49/edu.scoe.wss.web/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/tweeteclipse/!svn/ver/30/edu.scoe.wss.web/.project
+END
+build.properties
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/tweeteclipse/!svn/ver/39/edu.scoe.wss.web/build.properties
+END
+plugin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/tweeteclipse/!svn/ver/46/edu.scoe.wss.web/plugin.xml
+END

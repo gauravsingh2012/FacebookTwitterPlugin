@@ -1,0 +1,97 @@
+package edu.scoe.wss.web.internal.facebook.impl;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.List;
+
+import com.restfb.types.Post;
+
+public class FacebookFileWriter {
+
+	private static String FILEPATH = "";
+	
+	public FacebookFileWriter(String filePath) {
+		FILEPATH = filePath;
+	}
+	
+	public void writeFeedsToHTML(FaceBookOperations fboperations) throws IOException{
+		Writer output = null;
+<<<<<<< .mine
+		
+			File file = new File(FILEPATH);
+			output = new BufferedWriter(new FileWriter(file));
+			if (Text != null)
+			{
+			initializeHTML(output);
+			
+				writeText(output, Text);
+				writeNewLine(output);
+		
+			
+			finalizeHTML(output);
+			System.out.println("Your file has been written"); 
+			output.flush();
+			output.close();
+			}
+=======
+
+		File file = new File(FILEPATH);
+		output = new BufferedWriter(new FileWriter(file));
+
+		initializeHTML(output);
+		for(Post post : fboperations.getFeeds().getData()){
+			String message = post.getMessage();
+			if(message== null) continue;
+			writeText(output, message);
+			writeNewLine(output);
+		}
+		finalizeHTML(output);
+		output.flush();
+		output.close();
+		System.out.println("Your file has been written"); 
+
+	}
+>>>>>>> .r48
+			}
+	
+	private void initializeHTML(Writer output) throws IOException{
+		output.write("<html>");
+		output.write("<body>");
+		output.write("<b>");
+	}
+	
+	private void finalizeHTML(Writer output) throws IOException{
+		output.write("</b></body></html>");
+	}
+	
+	private void writeImage(Writer output, String imagePath) throws IOException{
+		output.write("<img src=\"" + imagePath + " \" ");
+		output.write("alt=\"some_text\"/>");
+	}
+	
+	private void writeText(Writer out, String text) throws IOException{
+		int index = text.indexOf('<');
+		if(index == -1)
+		{
+			out.write(text);
+		}
+		else
+		{
+			String strreplace="&#60;";
+			text = text.replaceAll("<", strreplace);
+			out.write(text);
+		}
+	}
+	
+	private void writeNewLine(Writer output) throws IOException{
+		output.write("<br><br>");
+	}
+	
+	public String getFilePath(){
+		return FILEPATH;
+	}
+	
+}

@@ -1,0 +1,107 @@
+package edu.scoe.wss.web.internal.views;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.ui.part.ViewPart;
+
+public class BrowserViewPart extends ViewPart {
+	private Browser browser;
+
+	public BrowserViewPart() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	@Override
+	public void createPartControl(Composite parent) {
+		// TODO Auto-generated method stub
+		GridLayout layout = new GridLayout();
+		layout.numColumns =1;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		parent.setLayout(layout);
+		
+		ToolBar toolbar = new ToolBar(parent, SWT.NONE);
+		ToolItem itemBack = new ToolItem(toolbar, SWT.PUSH);
+		itemBack.setText("Back");
+		ToolItem itemForward = new ToolItem(toolbar, SWT.PUSH);
+		itemForward.setText("Forward");
+		ToolItem itemStop = new ToolItem(toolbar, SWT.PUSH);
+		itemStop.setText("Stop");
+		ToolItem itemRefresh = new ToolItem(toolbar, SWT.PUSH);
+		itemRefresh.setText("Refresh");
+		ToolItem itemGo = new ToolItem(toolbar, SWT.PUSH);
+		itemGo.setText("Go");
+		final Text location = new Text(parent, SWT.BORDER);
+		location.setBounds(10, 35, 500, 25);	
+
+		layout = new GridLayout();
+		layout.numColumns =5;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		toolbar.setLayout(layout);
+		
+		final Composite parentBrowser = new Composite(parent, SWT.BORDER);
+		GridData layoutData = new GridData();
+		layoutData.grabExcessHorizontalSpace = true;
+		layoutData.grabExcessVerticalSpace = true;
+		layoutData.horizontalAlignment = GridData.FILL;
+		layoutData.verticalAlignment = GridData.FILL;
+		parentBrowser.setLayoutData(layoutData);
+		layout = new GridLayout();
+		layout.numColumns = 1;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		parentBrowser.setLayout(layout);
+		
+
+		
+		browser = new Browser(parentBrowser,SWT.None);
+		layoutData = new GridData();
+		layoutData.grabExcessHorizontalSpace = true;
+		layoutData.grabExcessVerticalSpace = true;
+		layoutData.horizontalAlignment = GridData.FILL;
+		layoutData.verticalAlignment = GridData.FILL;
+		browser.setLayoutData(layoutData);
+		browser.setUrl("http://www.google.co.in");
+	
+		Listener listener = new Listener() {
+			public void handleEvent(Event event) {
+				ToolItem item = (ToolItem)event.widget;
+				String string = item.getText();
+				if (string.equals("Back")) browser.back(); 
+				else if (string.equals("Forward")) browser.forward();
+				else if (string.equals("Stop")) browser.stop();
+				else if (string.equals("Refresh")) browser.refresh();
+				else if (string.equals("Go")) browser.setUrl(location.getText());
+		   }
+		};
+		
+		itemBack.addListener(SWT.Selection, listener);
+		itemForward.addListener(SWT.Selection, listener);
+		itemStop.addListener(SWT.Selection, listener);
+		itemRefresh.addListener(SWT.Selection, listener);
+		itemGo.addListener(SWT.Selection, listener);
+		location.addListener(SWT.DefaultSelection, new Listener() {
+			public void handleEvent(Event e) {
+				browser.setUrl(location.getText());
+			}
+		});
+			
+	}
+
+	@Override
+	public void setFocus() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

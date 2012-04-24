@@ -1,0 +1,59 @@
+package edu.scoe.wss.web.internal.facebook.impl;
+
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.Parameter;
+import com.restfb.types.FacebookType;
+import com.restfb.types.Post;
+import com.restfb.types.User;
+
+public class FaceBookOperations {
+	
+	private String API_KEY = "164302190291616"; //$NON-NLS-1$
+	private String Secret = "c5e50a4242da72f8fb74bf8631c1d84d"; //$NON-NLS-1$
+<<<<<<< .mine
+	private String access = "2227470867|2.Hu6cmdva0gBQM5vTk4CGMw__.3600.1302033600-568780277|h5l_7w4_MvMbwXz5LpXlnhq0Pbc"; //$NON-NLS-1$
+=======
+	private String readAccess ="2227470867|2.jYJOSblup2IEjLX2__w_2A__.3600.1302033600-752701396|uIXwFHwxvilJV2ci1j3oyut1aH8"; //$NON-NLS-1$
+	private String publishAccess = "164302190291616|3f5197a790e330b820f273a5-752701396|fO7xHXps9eEheL2O1O_N_f8ycIs"; //$NON-NLS-1$
+>>>>>>> .r50
+	private DefaultFacebookClient facebookClient;
+	
+	private DefaultFacebookClient facebookUpdateClient;
+	
+	
+	public FaceBookOperations() {
+		this.facebookUpdateClient= new DefaultFacebookClient(publishAccess);
+		this.facebookClient = new DefaultFacebookClient(
+				readAccess);
+	}
+	
+	public Connection<Post> getFeeds(){
+		Connection<Post> myFeed = facebookClient.fetchConnection(
+				"me/feed", Post.class); //$NON-NLS-1$
+		
+		return myFeed;
+	}
+	
+	/*public Connection<Post> getFeeds1(){
+		 Connection<Post> myFeedPage2 = facebookClient.fetchConnectionPage(myFeed.getNextPageUrl(), Post.class);
+			  return myFeedPage2;
+		
+	}*/
+	
+	public Connection<User> getUsers(){
+		Connection<User> myFriends = facebookClient.fetchConnection(
+				"me/friends", User.class); //$NON-NLS-1$
+		return myFriends;
+	}
+	
+	public User getMe(){
+		User user = facebookClient.fetchObject("me", User.class);
+		return user;
+	}
+	public FacebookType getmessage(String text){
+		FacebookType publishMessageResponse = facebookUpdateClient.publish("me/feed", FacebookType.class,Parameter.with("message", text));
+		return publishMessageResponse;
+	}
+	
+}

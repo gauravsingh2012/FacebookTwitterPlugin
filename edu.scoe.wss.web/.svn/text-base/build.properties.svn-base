@@ -1,0 +1,19 @@
+output.. = bin/
+bin.includes = plugin.xml,\
+               META-INF/,\
+               icons/,\
+               ./,\
+               twitter4j/twitter4j-async-2.2.0.jar,\
+               twitter4j/twitter4j-core-2.2.0.jar,\
+               twitter4j/twitter4j-examples-2.2.0.jar,\
+               twitter4j/twitter4j-media-support-2.2.0.jar,\
+               twitter4j/twitter4j-stream-2.2.0.jar,\
+               RestFB/restfb-1.6.4.jar
+source../ = src/
+source.twitter4j/twitter4j-core-2.2.0.jar = 
+source.twitter4j/twitter4j-async-2.2.0.jar = 
+jars.compile.order = ./,\
+                     twitter4j/twitter4j-core-2.2.0.jar,\
+                     twitter4j/twitter4j-async-2.2.0.jar,\
+                     twitter4j/twitter4j-stream-2.2.0.jar
+source.twitter4j/twitter4j-stream-2.2.0.jar = 

@@ -1,0 +1,111 @@
+package edu.scoe.wss.web.internal.views;
+
+import java.io.IOException;
+
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.part.ViewPart;
+
+import edu.scoe.wss.web.Activator;
+import edu.scoe.wss.web.internal.bookmark.impl.BookmarkFileWriter;
+
+
+public class BookmarkViewPart extends ViewPart {
+
+	private Browser browser;
+	public static final String bookmarkHTMLFile = "bookmark.html"; //$NON-NLS-1$
+	public String text;
+
+	public BookmarkViewPart() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void createPartControl(Composite parent) {
+		// TODO Auto-generated method stub
+
+		GridLayout layout = new GridLayout();
+		layout.numColumns =1;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		parent.setLayout(layout);
+
+		
+		final Composite compositeForURL = new Composite(parent, SWT.NONE);
+		GridLayout layoutUpdateStatus = new GridLayout();
+		layoutUpdateStatus.numColumns = 2;
+		compositeForURL.setLayout(layoutUpdateStatus);
+		final Text location = new Text(compositeForURL, SWT.BORDER);
+
+		GridData layoutData1 = new GridData(300,20);
+		layoutData1.grabExcessHorizontalSpace = true;
+		layoutData1.grabExcessVerticalSpace = false;
+		location.setLayoutData(layoutData1);
+
+		Button book = new Button(compositeForURL, SWT.PUSH);
+		book.setText("Bookmark Through TEXT BAR"); //$NON-NLS-1$
+		
+		parent.setSize(300, 300);
+
+		final Composite parentBrowser = new Composite(parent, SWT.BORDER);
+		GridData layoutData = new GridData();
+		layoutData.grabExcessHorizontalSpace = true;
+		layoutData.grabExcessVerticalSpace = true;
+		layoutData.horizontalAlignment = GridData.FILL;
+		layoutData.verticalAlignment = GridData.FILL;
+		parentBrowser.setLayoutData(layoutData);
+		
+		layout = new GridLayout();
+		layout.numColumns = 1;
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		parentBrowser.setLayout(layout);
+
+		browser = new Browser(parentBrowser,SWT.None);
+		
+		layoutData = new GridData();
+		layoutData.grabExcessHorizontalSpace = true;
+		layoutData.grabExcessVerticalSpace = true;
+		layoutData.horizontalAlignment = GridData.FILL;
+		layoutData.verticalAlignment = GridData.FILL;
+		browser.setLayoutData(layoutData);
+		
+		
+		Listener bookListener = new Listener() {
+			public void handleEvent(Event event) {
+				
+				text = location.getText();
+			}
+		};
+		book.addListener(SWT.MouseDown, bookListener);
+	}
+
+	@Override
+	public void setFocus() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public void retrieveURL(String TextURL) throws IOException {
+		writeToFile();
+	}
+	private void writeToFile() throws IOException {
+		IPath path = Activator.getDefault().getStateLocation().append(bookmarkHTMLFile);
+		BookmarkFileWriter writer = new BookmarkFileWriter(path.toOSString());
+		writer.writeURLToHTML(text);
+		browser.setUrl(writer.getFilePath());
+	}
+	
+	public void refresh() throws IOException {
+		writeToFile();
+	}
+
+}
